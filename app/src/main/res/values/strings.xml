@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Ücret Hesaplama</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="unvan_arr">
+        <item>Ünvanı Seçiniz</item>
+        <item>Profesör</item>
+        <item>Doçent</item>
+        <item>Yar.Doçent</item>
+        <item>Ö.Görevlisi ve Okutman</item>
+        <item>M.E.B. Kadrolu Öğretmen</item>
+        <item>M.E.B. Sözleşmeli Öğretmen</item>
+        <item>M.E.B. Ücretli Öğretmen</item>
+    </string-array>
+    <string-array name="egitimturu_arr">
+        <item>Eğitim Türü</item>
+        <item>Normal Eğitim</item>
+        <item>Özel Eğitim</item>
+    </string-array>
+    <string-array name="mezuniyet_arr">
+        <item>Mezuniyet</item>
+        <item>Lisans</item>
+        <item>Y.Lisans</item>
+        <item>Doktora</item>
+    </string-array>
+    <string-array name="vergidilimi_arr">
+        <item>Vergi Dilimi</item>
+        <item>%15</item>
+        <item>%20</item>
+        <item>%27</item>
+        <item>%35</item>
+    </string-array>
+</resources>
+
