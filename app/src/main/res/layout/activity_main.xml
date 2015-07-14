@@ -11,7 +11,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:id="@+id/layout_unvan">
 
         <FrameLayout
             android:layout_width="150dp"
@@ -38,10 +39,11 @@
             <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/esdurumuspn"
+                android:id="@+id/unvanspn"
                 android:entries="@array/unvan_arr"
                 android:layout_weight="1"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
         </FrameLayout>
 
     </LinearLayout>
@@ -50,7 +52,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:id="@+id/layout_egitimturu">
 
         <FrameLayout
             android:layout_width="150dp"
@@ -79,9 +82,10 @@
             <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/cocuksayisispn"
+                android:id="@+id/egitimturuspn"
                 android:entries="@array/egitimturu_arr"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
 
         </FrameLayout>
 
@@ -91,7 +95,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:layout_height="40dp" >
+        android:layout_height="40dp"
+        android:id="@+id/layout_mezuniyet">
 
         <FrameLayout
             android:layout_width="150dp"
@@ -120,9 +125,10 @@
             <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/spinner"
+                android:id="@+id/sonogrenimspn"
                 android:entries="@array/mezuniyet_arr"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
         </FrameLayout>
     </LinearLayout>
 
@@ -130,7 +136,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:layout_height="40dp" >
+        android:layout_height="40dp"
+        android:id="@+id/layout_vergidilimi">
 
         <FrameLayout
             android:layout_width="150dp"
@@ -159,9 +166,10 @@
             <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/spinner2"
+                android:id="@+id/vergidilimispn"
                 android:entries="@array/vergidilimi_arr"
-                android:layout_gravity="center_vertical" />
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
         </FrameLayout>
     </LinearLayout>
 
@@ -169,7 +177,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:id="@+id/fiilen_gunduz"
+        android:id="@+id/layout_1"
         android:layout_height="40dp" >
 
         <FrameLayout
@@ -212,7 +220,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:id="@+id/fiilen_gece"
+        android:id="@+id/layout_2"
         android:layout_height="40dp" >
 
         <FrameLayout
@@ -255,7 +263,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:id="@+id/normal_gunduz"
+        android:id="@+id/layout_3"
         android:layout_height="40dp" >
 
         <FrameLayout
@@ -298,7 +306,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:id="@+id/normal_gece"
+        android:id="@+id/layout_4"
         android:layout_height="40dp" >
 
         <FrameLayout
@@ -341,7 +349,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:id="@+id/takviye_gunduz"
+        android:id="@+id/layout_5"
         android:layout_height="40dp" >
 
         <FrameLayout
@@ -384,7 +392,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:gravity="center_vertical"
-        android:id="@+id/takviye_gece"
+        android:id="@+id/layout_6"
         android:layout_height="40dp" >
 
         <FrameLayout
