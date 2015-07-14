@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
     int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint;
     String sec_unvantxt,sec_egitimturutxt,sec_sonogrenimtxt,sec_vergidilimitxt;
     ArrayAdapter<CharSequence> unvan_adapter,egitimturu_adapter,sonogrenim_adapter,vergidilimi_adapter;
-    LinearLayout layout_egitimturu,layout_mezuniyet,layout_vergidilimi,layout_1,layout_2,layout_3,layout_4,layout_5,layout_6;
+    LinearLayout layout_main,layout_egitimturu,layout_mezuniyet,layout_vergidilimi,layout_1,layout_2,layout_3,layout_4,layout_5,layout_6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setLayout() {
+        layout_main       = (LinearLayout) findViewById(R.id.layout_main);
         layout_egitimturu = (LinearLayout) findViewById(R.id.layout_egitimturu);
         layout_mezuniyet  = (LinearLayout) findViewById(R.id.layout_mezuniyet);
         layout_vergidilimi= (LinearLayout) findViewById(R.id.layout_vergidilimi);
@@ -38,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         layout_3          = (LinearLayout) findViewById(R.id.layout_3);
         layout_4          = (LinearLayout) findViewById(R.id.layout_4);
         layout_5          = (LinearLayout) findViewById(R.id.layout_5);
-        layout_5          = (LinearLayout) findViewById(R.id.layout_6);
+        layout_6          = (LinearLayout) findViewById(R.id.layout_6);
     }
 
     private void getSpinner() {
@@ -53,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sec_unvantxt=(String) parent.getItemAtPosition(position);
                 sec_unvanint=position;
-                setUnvanChange();
+                setVisibilityChange();
             }
 
             @Override
@@ -90,6 +91,7 @@ public class MainActivity extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 sec_sonogrenimtxt= (String) parent.getItemAtPosition(position);
                 sec_sonogrenimint=position;
+                setVisibilityChange();
             }
 
             @Override
@@ -117,14 +119,38 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
-    private void setUnvanChange() {
-        if (sec_unvanint==1){
-            //profesör
+    private void setVisibilityChange() {
+        layout_egitimturu.setVisibility(View.VISIBLE);
+        layout_mezuniyet.setVisibility(View.VISIBLE);
+        layout_vergidilimi.setVisibility(View.VISIBLE);
+        layout_1.setVisibility(View.VISIBLE);
+        layout_2.setVisibility(View.VISIBLE);
+        layout_3.setVisibility(View.VISIBLE);
+        layout_4.setVisibility(View.VISIBLE);
+        layout_5.setVisibility(View.VISIBLE);
+        layout_6.setVisibility(View.VISIBLE);
+
+        if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesör,//doçent,//yar. doçent
             layout_egitimturu.setVisibility(View.GONE);
-            layout_egitimturu.invalidate();
             layout_mezuniyet.setVisibility(View.GONE);
-            layout_mezuniyet.invalidate();
+            layout_4.setVisibility(View.GONE);
+            layout_5.setVisibility(View.GONE);
+            layout_6.setVisibility(View.GONE);
         }
+        if (sec_unvanint==5){
+            if(sec_sonogrenimint==0) {
+                layout_5.setVisibility(View.GONE);
+                layout_6.setVisibility(View.GONE);
+            }
+        }
+        if (sec_unvanint==6){
+            layout_mezuniyet.setVisibility(View.GONE);
+            layout_3.setVisibility(View.GONE);
+            layout_4.setVisibility(View.GONE);
+            layout_5.setVisibility(View.GONE);
+            layout_6.setVisibility(View.GONE);
+        }
+        layout_main.invalidate();
 
     }
 
