@@ -137,6 +137,7 @@ public class MainActivity extends ActionBarActivity {
             layout_5.setVisibility(View.GONE);
             layout_6.setVisibility(View.GONE);
         }
+        
         if (sec_unvanint==5){
             if(sec_sonogrenimint==0) {
                 layout_5.setVisibility(View.GONE);
