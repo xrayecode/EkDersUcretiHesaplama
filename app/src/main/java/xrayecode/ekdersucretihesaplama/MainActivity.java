@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends ActionBarActivity {
     String sec_unvantxt,sec_egitimturutxt,sec_sonogrenimtxt,sec_vergidilimitxt;
     ArrayAdapter<CharSequence> unvan_adapter,egitimturu_adapter,sonogrenim_adapter,vergidilimi_adapter;
     LinearLayout layout_main,layout_egitimturu,layout_mezuniyet,layout_vergidilimi,layout_1,layout_2,layout_3,layout_4,layout_5,layout_6;
+    TextView label_1,label_2,label_3,label_4,label_5,label_6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +42,17 @@ public class MainActivity extends ActionBarActivity {
         layout_4          = (LinearLayout) findViewById(R.id.layout_4);
         layout_5          = (LinearLayout) findViewById(R.id.layout_5);
         layout_6          = (LinearLayout) findViewById(R.id.layout_6);
+        label_1           = (TextView) findViewById(R.id.label_1);
+        label_2           = (TextView) findViewById(R.id.label_2);
+        label_3           = (TextView) findViewById(R.id.label_3);
+        label_4           = (TextView) findViewById(R.id.label_4);
+        label_5           = (TextView) findViewById(R.id.label_5);
+        label_6           = (TextView) findViewById(R.id.label_6);
     }
 
     private void getSpinner() {
 
-        //Ünvan Bilgisi Al
+        //Ãœnvan Bilgisi Al
         unvanspn= (Spinner) findViewById(R.id.unvanspn);
         unvan_adapter= ArrayAdapter.createFromResource(this, R.array.unvan_arr, android.R.layout.simple_spinner_item);
         unvan_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -63,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        //Eðitim Türü Bilgisini Al Bilgisi Al
+        //EÄŸitim TÃ¼rÃ¼ Bilgisini Al Bilgisi Al
         egitimturuspn= (Spinner) findViewById(R.id.egitimturuspn);
         egitimturu_adapter= ArrayAdapter.createFromResource(this, R.array.egitimturu_arr, android.R.layout.simple_spinner_item);
         egitimturu_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        //Son Öðrenim Bilgisini Al
+        //Son Ã–ÄŸrenim Bilgisini Al
         sonogrenimspn= (Spinner) findViewById(R.id.sonogrenimspn);
         sonogrenim_adapter= ArrayAdapter.createFromResource(this, R.array.mezuniyet_arr, android.R.layout.simple_spinner_item);
         sonogrenim_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -130,18 +138,25 @@ public class MainActivity extends ActionBarActivity {
         layout_5.setVisibility(View.VISIBLE);
         layout_6.setVisibility(View.VISIBLE);
 
-        if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesör,//doçent,//yar. doçent
+        if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesÃ¶r,//doÃ§ent,//yar. doÃ§ent
             layout_egitimturu.setVisibility(View.GONE);
             layout_mezuniyet.setVisibility(View.GONE);
             layout_4.setVisibility(View.GONE);
             layout_5.setVisibility(View.GONE);
             layout_6.setVisibility(View.GONE);
+            label_1.setText(R.string.gunduz_normal_ogretim);
+            label_2.setText(R.string.gece_normal_ogretim);
+            label_3.setText(R.string.gece_ikinci_ogretim);
         }
-        
+
         if (sec_unvanint==5){
             if(sec_sonogrenimint==0) {
                 layout_5.setVisibility(View.GONE);
                 layout_6.setVisibility(View.GONE);
+                label_1.setText(R.string.gunduz_normal_ogretim);
+                label_2.setText(R.string.gece_normal_ogretim);
+                label_3.setText(R.string.gunduz_takviye_kursu);
+                label_4.setText(R.string.gece_takviye_kursu);
             }
         }
         if (sec_unvanint==6){
@@ -150,12 +165,12 @@ public class MainActivity extends ActionBarActivity {
             layout_4.setVisibility(View.GONE);
             layout_5.setVisibility(View.GONE);
             layout_6.setVisibility(View.GONE);
+            label_1.setText(R.string.gunduz_normal_ogretim);
+            label_2.setText(R.string.gece_normal_ogretim);
         }
         layout_main.invalidate();
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

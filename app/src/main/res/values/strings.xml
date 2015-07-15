@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Ücret Hesaplama</string>
     <string name="action_settings">Settings</string>
+    <string name="gunduz_normal_ogretim">Gündüz Normal\nÖğretim</string>
+    <string name="gece_normal_ogretim">Gece Normal\nÖğretim</string>
+    <string name="gece_ikinci_ogretim">Gece İkinci\nÖğretim</string>
+    <string name="gece_takviye_kursu">Gece Takviye\nKursu</string>
+    <string name="gunduz_takviye_kursu">Gündüz Takviye\nKursu</string>
     <string-array name="unvan_arr">
         <item>Ünvanı Seçiniz</item>
         <item>Profesör</item>
