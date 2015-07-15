@@ -1,7 +1,9 @@
 package xrayecode.ekdersucretihesaplama;
 
+import android.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,23 @@ public class MainActivity extends ActionBarActivity {
         setLayout();
         getSpinner();
 
+
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.fragment_sonuc_dialog, null);
+        TextView domainText = (TextView) view.findViewById(R.id.title323);
+        domainText.setText("aaaaa");
+
+
+        btn=(Button) findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getFragmentManager();
+                SonucFragment dialogFragment = new SonucFragment ();
+                dialogFragment.show(fm, "Sample Fragment");
+
+            }
+        });
     }
 
     private void setLayout() {
@@ -52,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void getSpinner() {
 
-        //Ãœnvan Bilgisi Al
+        //Ünvan Bilgisi Al
         unvanspn= (Spinner) findViewById(R.id.unvanspn);
         unvan_adapter= ArrayAdapter.createFromResource(this, R.array.unvan_arr, android.R.layout.simple_spinner_item);
         unvan_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -71,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        //EÄŸitim TÃ¼rÃ¼ Bilgisini Al Bilgisi Al
+        //Eðitim Türü Bilgisini Al
         egitimturuspn= (Spinner) findViewById(R.id.egitimturuspn);
         egitimturu_adapter= ArrayAdapter.createFromResource(this, R.array.egitimturu_arr, android.R.layout.simple_spinner_item);
         egitimturu_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -89,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        //Son Ã–ÄŸrenim Bilgisini Al
+        //Son Öðrenim Bilgisini Al
         sonogrenimspn= (Spinner) findViewById(R.id.sonogrenimspn);
         sonogrenim_adapter= ArrayAdapter.createFromResource(this, R.array.mezuniyet_arr, android.R.layout.simple_spinner_item);
         sonogrenim_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -157,6 +176,13 @@ public class MainActivity extends ActionBarActivity {
                 label_2.setText(R.string.gece_normal_ogretim);
                 label_3.setText(R.string.gunduz_takviye_kursu);
                 label_4.setText(R.string.gece_takviye_kursu);
+            }else {
+                label_1.setText(R.string.gunduz_fiilen_girilen);
+                label_2.setText(R.string.gece_fiilen_girilen);
+                label_3.setText(R.string.gunduz_normal_ogretim);
+                label_4.setText(R.string.gece_normal_ogretim);
+                label_5.setText(R.string.gunduz_takviye_kursu);
+                label_6.setText(R.string.gece_takviye_kursu);
             }
         }
         if (sec_unvanint==6){

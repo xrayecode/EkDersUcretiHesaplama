@@ -6,6 +6,8 @@
     <string name="gece_ikinci_ogretim">Gece İkinci\nÖğretim</string>
     <string name="gece_takviye_kursu">Gece Takviye\nKursu</string>
     <string name="gunduz_takviye_kursu">Gündüz Takviye\nKursu</string>
+    <string name="gunduz_fiilen_girilen">Gündüz Fiilen Girilen</string>
+    <string name="gece_fiilen_girilen">Gece Fiilen Girilen</string>
     <string-array name="unvan_arr">
         <item>Ünvanı Seçiniz</item>
         <item>Profesör</item>
@@ -31,5 +33,8 @@
         <item>%27</item>
         <item>%35</item>
     </string-array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
 
