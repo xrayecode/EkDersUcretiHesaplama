@@ -13,7 +13,7 @@ public class SonucFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sonuc_dialog, container, false);
-        getDialog().setTitle("Simple Dialog");
+        getDialog().setTitle("SimpleFragment");
 
         Button dismiss = (Button) rootView.findViewById(R.id.dismiss);
         dismiss.setOnClickListener(new View.OnClickListener() {

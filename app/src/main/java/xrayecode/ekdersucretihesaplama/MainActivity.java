@@ -32,19 +32,13 @@ public class MainActivity extends ActionBarActivity {
         getSpinner();
 
 
-        LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.fragment_sonuc_dialog, null);
-        TextView domainText = (TextView) view.findViewById(R.id.title323);
-        domainText.setText("aaaaa");
-
-
         btn=(Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fm = getFragmentManager();
                 SonucFragment dialogFragment = new SonucFragment ();
-                dialogFragment.show(fm, "Sample Fragment");
+                dialogFragment.show(fm, "SimpleFragment");
 
             }
         });
