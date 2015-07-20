@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
     TextView label_1,label_2,label_3,label_4,label_5,label_6;
     EditText edit_1, edit_2,edit_3,edit_4,edit_5,edit_6;
     UcretHesapla uh;
+    FormBean fb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +51,18 @@ public class MainActivity extends Activity {
     }
 
     private void Hesapla(){
-        uh = new UcretHesapla();
-        uh.setEd1(Integer.parseInt(edit_1.getText().toString()));
-        uh.setEd2(Integer.parseInt(edit_2.getText().toString()));
-        uh.setEd3(Integer.parseInt(edit_3.getText().toString()));
-        uh.setEd4(Integer.parseInt(edit_4.getText().toString()));
-        uh.setEd5(Integer.parseInt(edit_5.getText().toString()));
-        uh.setEd6(Integer.parseInt(edit_6.getText().toString()));
-        uh.setSec_unvanint(this.sec_unvanint);
-        uh.setSec_egitimturuint(this.sec_egitimturuint);
-        uh.setSec_sonogrenimint(this.sec_sonogrenimint);
-        uh.setSec_vergidilimiint(this.sec_vergidilimiint);
+        fb = new FormBean();
+        fb.setEd1(Integer.parseInt(edit_1.getText().toString()));
+        fb.setEd2(Integer.parseInt(edit_2.getText().toString()));
+        fb.setEd3(Integer.parseInt(edit_3.getText().toString()));
+        fb.setEd4(Integer.parseInt(edit_4.getText().toString()));
+        fb.setEd5(Integer.parseInt(edit_5.getText().toString()));
+        fb.setEd6(Integer.parseInt(edit_6.getText().toString()));
+        fb.setSec_unvanint(this.sec_unvanint);
+        fb.setSec_egitimturuint(this.sec_egitimturuint);
+        fb.setSec_sonogrenimint(this.sec_sonogrenimint);
+        fb.setSec_vergidilimiint(this.sec_vergidilimiint);
+        uh = new UcretHesapla(fb);
     }
 
 
@@ -78,7 +80,7 @@ public class MainActivity extends Activity {
         txtTitle.setText("Sonuç");
 
         TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_dialog_message);
-        txtMessage.setText("Toplam:"+uh.getToplam()+" vergi:"+uh.getVergi()+" damga:"+uh.getDamga()+" net:"+uh.getNet());
+        txtMessage.setText("Toplam:" + uh.getToplam() + " vergi:" + uh.getVergi() + " damga:" + uh.getDamga() + " net:" + uh.getNet());
         /*
         Button btnOpenBrowser = (Button) dialog.findViewById(R.id.btn_open_browser);
         btnOpenBrowser.setOnClickListener(new View.OnClickListener() {
