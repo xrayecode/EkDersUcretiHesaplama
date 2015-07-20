@@ -23,14 +23,16 @@ public class UcretHesapla {
         if (fb.getSec_unvanint()==4) puan=160;
 
         if (fb.getEd1()>0){
-            alan1 = fb.getEd1() * maasKatsayi * puan;
+            alan1 =  Math.round ((fb.getEd1() * maasKatsayi * puan)*100.0)/100.0;
         }
         if (fb.getEd2()>0){
-            alan2 = fb.getEd2() * maasKatsayi * (puan*1.6); // % 60 daha fazlası
+            alan2 = Math.round (( fb.getEd2() * maasKatsayi * (puan*1.6))*100.0)/100.0; // % 60 daha fazlası
         }
         if (fb.getEd3()>0){
-            alan3 = fb.getEd3() * maasKatsayi * ((puan*2)*1.6); // 2 katının % 60 daha fazlası
+            alan3 =  Math.round ((fb.getEd3() * maasKatsayi * ((puan*2)*1.6))*100.0)/100.0; // % 60 daha fazlası  // 2 katının % 60 daha fazlası
         }
+
+        //Math.round((99999)*100.0)/100.0;
         alan4=0;
         alan5=0;
         alan6=0;
@@ -38,9 +40,9 @@ public class UcretHesapla {
 
     private void toplamtahakkuk(){
         this.toplam = alan1+alan2+alan3+alan4+alan5+alan6;
-        this.vergi  = toplam * 15/100;
-        this.damga  = toplam * 0.729/100;
-        this.net    = toplam - (vergi+damga);
+        this.vergi  = Math.round((toplam * 15/100)*100.0)/100.0;
+        this.damga  = Math.round((toplam * 0.729/100)*100.0)/100.0;
+        this.net    = Math.round((toplam - (vergi+damga))*100.0)/100.0;
     }
 
     public double getAlan1() {

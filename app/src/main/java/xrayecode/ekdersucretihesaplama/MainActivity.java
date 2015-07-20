@@ -136,7 +136,7 @@ public class MainActivity extends Activity {
 
     private void getSpinner() {
 
-        //Ünvan Bilgisi Al
+        //Ãœnvan Bilgisi Al
         unvanspn= (Spinner) findViewById(R.id.unvanspn);
         unvan_adapter= ArrayAdapter.createFromResource(this, R.array.unvan_arr, android.R.layout.simple_spinner_item);
         unvan_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -155,7 +155,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        //Eğitim Türü Bilgisini Al
+        //EÄŸitim TÃ¼rÃ¼ Bilgisini Al
         egitimturuspn= (Spinner) findViewById(R.id.egitimturuspn);
         egitimturu_adapter= ArrayAdapter.createFromResource(this, R.array.egitimturu_arr, android.R.layout.simple_spinner_item);
         egitimturu_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -173,7 +173,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        //Son Öğrenim Bilgisini Al
+        //Son Ã–ÄŸrenim Bilgisini Al
         sonogrenimspn= (Spinner) findViewById(R.id.sonogrenimspn);
         sonogrenim_adapter= ArrayAdapter.createFromResource(this, R.array.mezuniyet_arr, android.R.layout.simple_spinner_item);
         sonogrenim_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -222,7 +222,7 @@ public class MainActivity extends Activity {
         layout_5.setVisibility(View.VISIBLE);
         layout_6.setVisibility(View.VISIBLE);
 
-        if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesÃ¶r,//doÃ§ent,//yar. doÃ§ent
+        if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesÃƒÂ¶r,//doÃƒÂ§ent,//yar. doÃƒÂ§ent
             layout_egitimturu.setVisibility(View.GONE);
             layout_mezuniyet.setVisibility(View.GONE);
             layout_4.setVisibility(View.GONE);
