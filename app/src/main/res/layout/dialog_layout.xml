@@ -45,7 +45,7 @@
             android:layout_centerVertical="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_dialog_alert" />
+            android:src="@android:drawable/ic_dialog_info" />
 
         <TextView
             android:id="@+id/txt_dialog_message"
@@ -80,7 +80,7 @@
             android:layout_weight="1"
             android:background="#434343"
             android:gravity="center"
-            android:text="@android:string/cancel"
+            android:text="@string/btn_cancel"
             android:textAppearance="?android:attr/textAppearanceButton"
             android:textColor="@android:color/white" />
 

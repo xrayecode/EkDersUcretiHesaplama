@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         txtTitle.setText("Sonuç");
 
         TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_dialog_message);
-        txtMessage.setText("Toplam:" + uh.getToplam() + " vergi:" + uh.getVergi() + " damga:" + uh.getDamga() + " net:" + uh.getNet());
+        txtMessage.setText("Toplam:" + uh.getToplam() + "\nVergi:" + uh.getVergi() + "\nDamga:" + uh.getDamga() + "\nNet:" + uh.getNet());
         /*
         Button btnOpenBrowser = (Button) dialog.findViewById(R.id.btn_open_browser);
         btnOpenBrowser.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +221,14 @@ public class MainActivity extends Activity {
         layout_4.setVisibility(View.VISIBLE);
         layout_5.setVisibility(View.VISIBLE);
         layout_6.setVisibility(View.VISIBLE);
-
+        if(sec_unvanint==0){
+            layout_1.setVisibility(View.GONE);
+            layout_2.setVisibility(View.GONE);
+            layout_3.setVisibility(View.GONE);
+            layout_4.setVisibility(View.GONE);
+            layout_5.setVisibility(View.GONE);
+            layout_6.setVisibility(View.GONE);
+        }
         if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesÃƒÂ¶r,//doÃƒÂ§ent,//yar. doÃƒÂ§ent
             layout_egitimturu.setVisibility(View.GONE);
             layout_mezuniyet.setVisibility(View.GONE);
