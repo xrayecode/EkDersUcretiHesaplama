@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Ücret Hesaplama</string>
     <string name="action_settings">Settings</string>
+    <string name="custom_dialog_head">Alacağınız Miktar</string>
+    <string name="visit_website">Visit Website</string>
     <string name="gunduz_normal_ogretim">Gündüz Normal\nÖğretim</string>
     <string name="gece_normal_ogretim">Gece Normal\nÖğretim</string>
     <string name="gece_ikinci_ogretim">Gece İkinci\nÖğretim</string>
