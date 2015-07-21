@@ -13,6 +13,47 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:gravity="center_vertical"
+        android:id="@+id/layout_islemturu" >
+
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="fill_parent"
+            android:background="#ff91c5d4"
+            android:paddingLeft="6dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="İşlem Türü"
+                android:width="120dp"
+                android:id="@+id/textView5"
+                android:autoText="false"
+                android:layout_gravity="center_vertical" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffd5eaf0"
+            android:layout_marginLeft="1dp" >
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/islemturuspn"
+                android:entries="@array/islemturu_arr"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center_vertical"
         android:id="@+id/layout_unvan">
 
         <FrameLayout
@@ -128,6 +169,87 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/sonogrenimspn"
                 android:entries="@array/mezuniyet_arr"
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
+        </FrameLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:gravity="center_vertical"
+        android:layout_height="40dp"
+        android:id="@+id/layout_statu" >
+
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="#ff91c5d4"
+            android:layout_marginTop="1dp"
+            android:paddingLeft="6dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Statü"
+                android:width="120dp"
+                android:id="@+id/textView3"
+                android:layout_gravity="center_vertical" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:background="#ffd5eaf0"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp" >
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/statuspn"
+                android:entries="@array/statu_arr"
+                android:layout_gravity="center_vertical"
+                android:spinnerMode="dialog" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:gravity="center_vertical"
+        android:layout_height="40dp"
+        android:id="@+id/layout_medeni" >
+
+        <FrameLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="#ff91c5d4"
+            android:layout_marginTop="1dp"
+            android:paddingLeft="6dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medeni Durumu"
+                android:width="120dp"
+                android:id="@+id/textView4"
+                android:layout_gravity="center_vertical" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_vertical"
+            android:background="#ffd5eaf0"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp" >
+
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/medenispn"
+                android:entries="@array/medeni_arr"
                 android:layout_gravity="center_vertical"
                 android:spinnerMode="dialog" />
         </FrameLayout>
@@ -437,14 +559,27 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#ffd7e1c5"
-        android:layout_marginTop="1dp">
+        android:layout_marginTop="1dp"
+        android:gravity="center_horizontal">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
-            android:layout_gravity="center_horizontal" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_hesapla"
+                android:layout_marginRight="20dp"
+                android:id="@+id/btn_hesapla"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_temizle"
+                android:id="@+id/btn_temizle" />
+        </LinearLayout>
     </LinearLayout>
 
 

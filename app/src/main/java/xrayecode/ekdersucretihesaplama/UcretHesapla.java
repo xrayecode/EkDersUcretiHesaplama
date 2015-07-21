@@ -5,51 +5,103 @@ package xrayecode.ekdersucretihesaplama;
  */
 public class UcretHesapla {
     private double alan1,alan2,alan3,alan4,alan5,alan6;
-    private double toplam,vergi,damga,net ;
+    private double toplam,vergi,damga,ssk,net ;
     private static final double maasKatsayi =0.083084;
-    private static final double damgaOran =0.729/100;
+    private static final double damgaOran =0.759/100;
+    private static final double sskOran =14/100;
 
     public UcretHesapla(FormBean fb) {
         if (fb.getSec_unvanint()==1 || fb.getSec_unvanint()==2  || fb.getSec_unvanint()==3 || fb.getSec_unvanint()==4 ){
             getIlkDortUnvanHesap(fb);
         }
+        if(fb.getSec_unvanint()==5)
+            getKadroluOgretmenHesap(fb);
+        if(fb.getSec_unvanint()==6)
+            getSozlesmeliOgretmenHesap(fb);
         toplamTahakkuk(fb);
     }
 
     private void getIlkDortUnvanHesap(FormBean fb){
         int puan=0;
-        if (fb.getSec_unvanint()==1) puan=300;
-        if (fb.getSec_unvanint()==2) puan=250;
-        if (fb.getSec_unvanint()==3) puan=200;
-        if (fb.getSec_unvanint()==4) puan=160;
+        if (fb.getSec_unvanint()==1) puan=300; // Prof
+        if (fb.getSec_unvanint()==2) puan=250; // Doç
+        if (fb.getSec_unvanint()==3) puan=200; // Yar. Doç
+        if (fb.getSec_unvanint()==4) puan=160; // Okutman Öðretim Gör.
 
-        if (fb.getEd1()>0){
-            alan1 =  yuvarla((fb.getEd1() * maasKatsayi * puan),2);
-        }
-        if (fb.getEd2()>0){
-            alan2 = yuvarla(( fb.getEd2() * maasKatsayi * (puan*1.6)),2); // % 60 daha fazlasÄ±
-        }
-        if (fb.getEd3()>0){
-            alan3 =  yuvarla((fb.getEd3() * maasKatsayi * ((puan*2)*1.6)),2); // % 60 daha fazlasÄ±  // 2 katÄ±nÄ±n % 60 daha fazlasÄ±
-        }
+        alan1 = yuvarla((fb.getEd1()  * maasKatsayi * puan),2);
+        alan2 = yuvarla(( fb.getEd2() * maasKatsayi * (puan*1.6)),2); // % 60 daha fazlasÄ±
+        alan3 = yuvarla((fb.getEd3()  * maasKatsayi * ((puan*2)*1.6)),2); // % 60 daha fazlasÄ±  // 2 katÄ±nÄ±n % 60 daha fazlasÄ±
+
         alan4=0;
         alan5=0;
         alan6=0;
     }
+    private void getKadroluOgretmenHesap(FormBean fb){
+        double gunduzpuan=140;
+        double gecepuan=150;
+        double fgunduzpuan=140;
+        double fgecepuan=150;
+        double tgunduzpuan=140*2;
+        double tgecepuan=150*2;
+        if (fb.getSec_egitimturuint()==1) {//Özel Öðretim
+            gunduzpuan *= 1.25;
+            gecepuan *= 1.25;
+            fgunduzpuan *= 1.25;
+            fgecepuan *= 1.25;
+            tgunduzpuan *= 1.25;
+            tgecepuan *= 1.25;
+        }
+        if (fb.getSec_sonogrenimint()==1) { //Y. Lisans
+            fgunduzpuan *= 1.05;
+            fgecepuan *= 1.05;
+        }
+        if (fb.getSec_sonogrenimint()==2) { //Doktora
+            fgunduzpuan *= 1.15;
+            fgecepuan *= 1.15;
+        }
+        if (fb.getSec_sonogrenimint()==0) { //Lisans
+            alan1 = ((fb.getEd1() * maasKatsayi * gunduzpuan));
+            alan2 = (fb.getEd2() * maasKatsayi * gecepuan);
+            alan3 = (fb.getEd3() * maasKatsayi * gunduzpuan * 2);
+            alan4 = (fb.getEd4() * maasKatsayi * gecepuan * 2);
+        } else { // Y.Lisans and Doktora
+            alan1 = (fb.getEd1() * maasKatsayi * fgunduzpuan);
+            alan2 = (fb.getEd2() * maasKatsayi * fgecepuan);
+            alan3 = (fb.getEd3() * maasKatsayi * gunduzpuan);
+            alan4 = (fb.getEd4() * maasKatsayi * gecepuan);
+            alan5 = (fb.getEd5() * maasKatsayi * tgunduzpuan);
+            alan6 = (fb.getEd6() * maasKatsayi * tgecepuan);
+        }
+    }
+
+    private void getSozlesmeliOgretmenHesap(FormBean fb){
+        double gunduzpuan=140;
+        double gecepuan=150;
+        if (fb.getSec_egitimturuint()==1) {//Özel Öðretim
+            gunduzpuan *= 1.25;
+            gecepuan *= 1.25;
+        }
+        alan1 = ((fb.getEd1() * maasKatsayi * gunduzpuan));
+        alan2 = (fb.getEd2() * maasKatsayi * gecepuan);
+        alan3 = 0; alan4 = 0; alan5 = 0; alan6 = 0;
+    }
 
     private void toplamTahakkuk(FormBean fb){
-        this.toplam = alan1+alan2+alan3+alan4+alan5+alan6;
-        this.vergi  = yuvarla((toplam * voran(fb.getSec_vergidilimiint())/100),2);
+        this.ssk=0;
+        this.toplam = yuvarla(alan1+alan2+alan3+alan4+alan5+alan6,2);
+        if (fb.getSec_unvanint()==6) // sözleþmeliden ssk kesilir.
+            this.ssk=this.toplam*sskOran;
+        this.vergi  = yuvarla(((toplam-ssk) * voran(fb.getSec_vergidilimiint())/100),2);
         this.damga  = yuvarla(toplam * damgaOran,2);
-        this.net    = yuvarla(toplam - (vergi+damga),2);
+        this.net    = yuvarla(toplam - (vergi+damga+ssk),2);
     }
 
     public int voran(int v){
         switch(v){
-            case 1: return 15;
-            case 2: return 20;
-            case 3: return 27;
-            case 4: return 35;
+            case 0: return 15;
+            case 1: return 20;
+            case 2: return 27;
+            case 3: return 35;
         }
         return 0;
     }
@@ -151,5 +203,13 @@ public class UcretHesapla {
 
     public static double getMaasKatsayi() {
         return maasKatsayi;
+    }
+
+    public double getSsk() {
+        return ssk;
+    }
+
+    public void setSsk(double ssk) {
+        this.ssk = ssk;
     }
 }

@@ -5,7 +5,7 @@ package xrayecode.ekdersucretihesaplama;
  */
 public class FormBean {
     private int ed1,ed2,ed3,ed4,ed5,ed6;
-    private int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint;
+    private int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint,sec_medeniint,sec_statuint,sec_islemturuint;
 
     public int getEd1() {
         return ed1;
@@ -85,5 +85,29 @@ public class FormBean {
 
     public void setSec_vergidilimiint(int sec_vergidilimiint) {
         this.sec_vergidilimiint = sec_vergidilimiint;
+    }
+
+    public int getSec_medeniint() {
+        return sec_medeniint;
+    }
+
+    public void setSec_medeniint(int sec_medeniint) {
+        this.sec_medeniint = sec_medeniint;
+    }
+
+    public int getSec_statuint() {
+        return sec_statuint;
+    }
+
+    public void setSec_statuint(int sec_statuint) {
+        this.sec_statuint = sec_statuint;
+    }
+
+    public int getSec_islemturuint() {
+        return sec_islemturuint;
+    }
+
+    public void setSec_islemturuint(int sec_islemturuint) {
+        this.sec_islemturuint = sec_islemturuint;
     }
 }

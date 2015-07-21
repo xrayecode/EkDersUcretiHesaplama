@@ -22,11 +22,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
     Button btn;
     LinearLayout l1;
-    Spinner unvanspn,egitimturuspn,sonogrenimspn,vergidilimispn;
-    int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint;
-    String sec_unvantxt,sec_egitimturutxt,sec_sonogrenimtxt,sec_vergidilimitxt;
-    ArrayAdapter<CharSequence> unvan_adapter,egitimturu_adapter,sonogrenim_adapter,vergidilimi_adapter;
-    LinearLayout layout_main,layout_egitimturu,layout_mezuniyet,layout_vergidilimi,layout_1,layout_2,layout_3,layout_4,layout_5,layout_6;
+    Spinner unvanspn,egitimturuspn,sonogrenimspn,vergidilimispn,statuspn,medenispn,islemturuspn;
+    int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint,sec_medeniint,sec_statuint,sec_islemturuint;
+    String sec_unvantxt,sec_egitimturutxt,sec_sonogrenimtxt,sec_vergidilimitxt,sec_medenitxt,sec_statutxt,sec_islemturutxt;
+    ArrayAdapter<CharSequence> unvan_adapter,egitimturu_adapter,sonogrenim_adapter,vergidilimi_adapter,statu_adapter,medeni_adapter,islemturu_adapter;
+    LinearLayout layout_main,layout_unvan,layout_egitimturu,layout_mezuniyet,layout_vergidilimi,layout_medeni,layout_statu,layout_islemturu,layout_1,layout_2,layout_3,layout_4,layout_5,layout_6;
     TextView label_1,label_2,label_3,label_4,label_5,label_6;
     EditText edit_1, edit_2,edit_3,edit_4,edit_5,edit_6;
     UcretHesapla uh;
@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
         getSpinner();
 
 
-        btn=(Button) findViewById(R.id.button);
+        btn=(Button) findViewById(R.id.btn_hesapla);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,19 +52,29 @@ public class MainActivity extends Activity {
 
     private void Hesapla(){
         fb = new FormBean();
-        fb.setEd1(Integer.parseInt(edit_1.getText().toString()));
-        fb.setEd2(Integer.parseInt(edit_2.getText().toString()));
-        fb.setEd3(Integer.parseInt(edit_3.getText().toString()));
-        fb.setEd4(Integer.parseInt(edit_4.getText().toString()));
-        fb.setEd5(Integer.parseInt(edit_5.getText().toString()));
-        fb.setEd6(Integer.parseInt(edit_6.getText().toString()));
+        fb.setEd1(Integer.parseInt(nvl(edit_1.getText().toString(),"0")));
+        fb.setEd2(Integer.parseInt(nvl(edit_2.getText().toString(),"0")));
+        fb.setEd3(Integer.parseInt(nvl(edit_3.getText().toString(), "0")));
+        fb.setEd4(Integer.parseInt(nvl(edit_4.getText().toString(), "0")));
+        fb.setEd5(Integer.parseInt(nvl(edit_5.getText().toString(), "0")));
+        fb.setEd6(Integer.parseInt(nvl(edit_6.getText().toString(), "0")));
         fb.setSec_unvanint(this.sec_unvanint);
         fb.setSec_egitimturuint(this.sec_egitimturuint);
         fb.setSec_sonogrenimint(this.sec_sonogrenimint);
         fb.setSec_vergidilimiint(this.sec_vergidilimiint);
+        fb.setSec_statuint(this.sec_statuint);
+        fb.setSec_medeniint(this.sec_medeniint);
+        fb.setSec_islemturuint(this.sec_islemturuint);
+
+
         uh = new UcretHesapla(fb);
     }
 
+    private String nvl(String str,String val){
+        if(str != null && !str.isEmpty()) { return str;  }
+        return val;
+
+    }
 
 
     private void showSonucDialog() {
@@ -112,6 +122,10 @@ public class MainActivity extends Activity {
         layout_egitimturu = (LinearLayout) findViewById(R.id.layout_egitimturu);
         layout_mezuniyet  = (LinearLayout) findViewById(R.id.layout_mezuniyet);
         layout_vergidilimi= (LinearLayout) findViewById(R.id.layout_vergidilimi);
+        layout_medeni     = (LinearLayout) findViewById(R.id.layout_medeni);
+        layout_statu      = (LinearLayout) findViewById(R.id.layout_statu);
+        layout_islemturu  = (LinearLayout) findViewById(R.id.layout_islemturu);
+        layout_unvan      = (LinearLayout) findViewById(R.id.layout_unvan);
         layout_1          = (LinearLayout) findViewById(R.id.layout_1);
         layout_2          = (LinearLayout) findViewById(R.id.layout_2);
         layout_3          = (LinearLayout) findViewById(R.id.layout_3);
@@ -209,29 +223,98 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        //Statü Seçimi
+        statuspn= (Spinner) findViewById(R.id.statuspn);
+        statu_adapter= ArrayAdapter.createFromResource(this, R.array.statu_arr, android.R.layout.simple_spinner_item);
+        statu_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statuspn.setAdapter(statu_adapter);
+        statuspn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sec_statutxt= (String) parent.getItemAtPosition(position);
+                sec_statuint = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Medeni Seçimi
+        medenispn= (Spinner) findViewById(R.id.medenispn);
+        medeni_adapter= ArrayAdapter.createFromResource(this, R.array.medeni_arr, android.R.layout.simple_spinner_item);
+        medeni_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        medenispn.setAdapter(medeni_adapter);
+        medenispn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sec_medenitxt= (String) parent.getItemAtPosition(position);
+                sec_medeniint = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //İşlem Türü Seçimi
+        islemturuspn= (Spinner) findViewById(R.id.islemturuspn);
+        islemturu_adapter= ArrayAdapter.createFromResource(this, R.array.islemturu_arr, android.R.layout.simple_spinner_item);
+        islemturu_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        islemturuspn.setAdapter(islemturu_adapter);
+        islemturuspn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sec_islemturutxt= (String) parent.getItemAtPosition(position);
+                sec_islemturuint = position;
+                setVisibilityChange();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
     }
 
     private void setVisibilityChange() {
+        layout_unvan.setVisibility(View.VISIBLE);
         layout_egitimturu.setVisibility(View.VISIBLE);
         layout_mezuniyet.setVisibility(View.VISIBLE);
         layout_vergidilimi.setVisibility(View.VISIBLE);
+        layout_medeni.setVisibility(View.VISIBLE);
+        layout_statu.setVisibility(View.VISIBLE);
         layout_1.setVisibility(View.VISIBLE);
         layout_2.setVisibility(View.VISIBLE);
         layout_3.setVisibility(View.VISIBLE);
         layout_4.setVisibility(View.VISIBLE);
         layout_5.setVisibility(View.VISIBLE);
         layout_6.setVisibility(View.VISIBLE);
-        if(sec_unvanint==0){
+        edit_1.setText("");edit_2.setText("");
+        edit_3.setText("");edit_4.setText("");
+        edit_5.setText("");edit_6.setText("");
+        if(sec_unvanint==0 && sec_islemturuint==0){
             layout_1.setVisibility(View.GONE);
             layout_2.setVisibility(View.GONE);
             layout_3.setVisibility(View.GONE);
             layout_4.setVisibility(View.GONE);
             layout_5.setVisibility(View.GONE);
             layout_6.setVisibility(View.GONE);
-        }
-        if (sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4 ){//profesÃƒÂ¶r,//doÃƒÂ§ent,//yar. doÃƒÂ§ent
             layout_egitimturu.setVisibility(View.GONE);
             layout_mezuniyet.setVisibility(View.GONE);
+            layout_vergidilimi.setVisibility(View.GONE);
+            layout_medeni.setVisibility(View.GONE);
+            layout_statu.setVisibility(View.GONE);
+        }
+        if ((sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4)  && sec_islemturuint==0 ){//profesÃƒÂ¶r,//doÃƒÂ§ent,//yar. doÃƒÂ§ent
+            layout_egitimturu.setVisibility(View.GONE);
+            layout_mezuniyet.setVisibility(View.GONE);
+            layout_medeni.setVisibility(View.GONE);
+            layout_statu.setVisibility(View.GONE);
             layout_4.setVisibility(View.GONE);
             layout_5.setVisibility(View.GONE);
             layout_6.setVisibility(View.GONE);
@@ -240,7 +323,9 @@ public class MainActivity extends Activity {
             label_3.setText(R.string.gece_ikinci_ogretim);
         }
 
-        if (sec_unvanint==5){
+        if (sec_unvanint==5  && sec_islemturuint==0){
+            layout_medeni.setVisibility(View.GONE);
+            layout_statu.setVisibility(View.GONE);
             if(sec_sonogrenimint==0) {
                 layout_5.setVisibility(View.GONE);
                 layout_6.setVisibility(View.GONE);
@@ -257,8 +342,10 @@ public class MainActivity extends Activity {
                 label_6.setText(R.string.gece_takviye_kursu);
             }
         }
-        if (sec_unvanint==6){
+        if (sec_unvanint==6 && sec_islemturuint==0){
             layout_mezuniyet.setVisibility(View.GONE);
+            layout_medeni.setVisibility(View.GONE);
+            layout_statu.setVisibility(View.GONE);
             layout_3.setVisibility(View.GONE);
             layout_4.setVisibility(View.GONE);
             layout_5.setVisibility(View.GONE);
@@ -266,6 +353,30 @@ public class MainActivity extends Activity {
             label_1.setText(R.string.gunduz_normal_ogretim);
             label_2.setText(R.string.gece_normal_ogretim);
         }
+        if (sec_unvanint==7 && sec_islemturuint==0){
+            layout_mezuniyet.setVisibility(View.GONE);
+            layout_egitimturu.setVisibility(View.GONE);
+            layout_3.setVisibility(View.GONE);
+            layout_4.setVisibility(View.GONE);
+            layout_5.setVisibility(View.GONE);
+            layout_6.setVisibility(View.GONE);
+            label_1.setText(R.string.gunduz_normal_ogretim);
+            label_2.setText(R.string.gece_normal_ogretim);
+        }
+        if (sec_islemturuint==1){
+            layout_unvan.setVisibility(View.GONE);
+            layout_egitimturu.setVisibility(View.GONE);
+            layout_mezuniyet.setVisibility(View.GONE);
+            layout_vergidilimi.setVisibility(View.GONE);
+            layout_statu.setVisibility(View.GONE);
+            layout_1.setVisibility(View.GONE);
+            layout_2.setVisibility(View.GONE);
+            layout_3.setVisibility(View.GONE);
+            layout_4.setVisibility(View.GONE);
+            layout_5.setVisibility(View.GONE);
+            layout_6.setVisibility(View.GONE);
+        }
+
         layout_main.invalidate();
 
     }
