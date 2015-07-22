@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     ArrayAdapter<CharSequence> unvan_adapter,egitimturu_adapter,sonogrenim_adapter,vergidilimi_adapter,statu_adapter,medeni_adapter,islemturu_adapter;
     LinearLayout layout_main,layout_unvan,layout_egitimturu,layout_mezuniyet,layout_vergidilimi,layout_medeni,layout_statu,layout_islemturu,layout_1,layout_2,layout_3,layout_4,layout_5,layout_6;
     TextView label_1,label_2,label_3,label_4,label_5,label_6;
-    EditText edit_1, edit_2,edit_3,edit_4,edit_5,edit_6;
+    EditText edit_1,edit_2,edit_3,edit_4,edit_5,edit_6;
     UcretHesapla uh;
     FormBean fb;
 
@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
         txtTitle.setText("Sonuç");
 
         TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_dialog_message);
-        txtMessage.setText("Toplam:" + uh.getToplam() + "\nVergi:" + uh.getVergi() + "\nDamga:" + uh.getDamga() + "\nNet:" + uh.getNet());
+        txtMessage.setText("Toplam:" + uh.getToplam() + "\nVergi:" + uh.getVergi() + "\nDamga:" + uh.getDamga()+" \nSsk:"+uh.getSsk()+"\nAgi:"+uh.getAgi()+ "\nNet:" + uh.getNet());
         /*
         Button btnOpenBrowser = (Button) dialog.findViewById(R.id.btn_open_browser);
         btnOpenBrowser.setOnClickListener(new View.OnClickListener() {

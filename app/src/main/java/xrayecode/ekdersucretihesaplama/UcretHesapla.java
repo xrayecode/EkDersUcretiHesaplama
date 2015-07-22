@@ -5,32 +5,52 @@ package xrayecode.ekdersucretihesaplama;
  */
 public class UcretHesapla {
     private double alan1,alan2,alan3,alan4,alan5,alan6;
-    private double toplam,vergi,damga,ssk,net ;
+    private double toplam,vergi,damga,ssk,net,agi;
+    private int primGunu;
     private static final double maasKatsayi =0.083084;
     private static final double damgaOran =0.759/100;
-    private static final double sskOran =14/100;
+    private static final double sskOran =14;
+    private static final double sskEmekliOran =7.5;
+    private static final double asgariUcret =1201.50;
 
     public UcretHesapla(FormBean fb) {
-        if (fb.getSec_unvanint()==1 || fb.getSec_unvanint()==2  || fb.getSec_unvanint()==3 || fb.getSec_unvanint()==4 ){
-            getIlkDortUnvanHesap(fb);
+
+        switch (fb.getSec_unvanint()){
+            case 1:
+            case 2:
+            case 3:
+            case 4:{
+                getIlkDortUnvanHesap(fb);
+                break;
+            }
+            case 5:{
+                getKadroluOgretmenHesap(fb);
+                break;
+            }
+            case 6:{
+                getSozlesmeliOgretmenHesap(fb);
+                break;
+            }
+            case 7:{
+                getUcretliOgretmenHesap(fb);
+                break;
+            }
+
+
         }
-        if(fb.getSec_unvanint()==5)
-            getKadroluOgretmenHesap(fb);
-        if(fb.getSec_unvanint()==6)
-            getSozlesmeliOgretmenHesap(fb);
         toplamTahakkuk(fb);
     }
 
     private void getIlkDortUnvanHesap(FormBean fb){
         int puan=0;
         if (fb.getSec_unvanint()==1) puan=300; // Prof
-        if (fb.getSec_unvanint()==2) puan=250; // Do�
-        if (fb.getSec_unvanint()==3) puan=200; // Yar. Do�
-        if (fb.getSec_unvanint()==4) puan=160; // Okutman ��retim G�r.
+        if (fb.getSec_unvanint()==2) puan=250; // Doç
+        if (fb.getSec_unvanint()==3) puan=200; // Yar. Doç
+        if (fb.getSec_unvanint()==4) puan=160; // Okutman Öğretim Görevlisi
 
-        alan1 = yuvarla((fb.getEd1()  * maasKatsayi * puan),2);
-        alan2 = yuvarla(( fb.getEd2() * maasKatsayi * (puan*1.6)),2); // % 60 daha fazlası
-        alan3 = yuvarla((fb.getEd3()  * maasKatsayi * ((puan*2)*1.6)),2); // % 60 daha fazlası  // 2 katının % 60 daha fazlası
+        alan1 = yuvarla((fb.getEd1()  * maasKatsayi *  puan),2);
+        alan2 = yuvarla(( fb.getEd2() * maasKatsayi * (puan*1.6)),2);    // % 60 daha fazlası
+        alan3 = yuvarla((fb.getEd3()  * maasKatsayi *((puan*2)*1.6)),2); // % 60 daha fazlası  // 2 katının % 60 daha fazlası
 
         alan4=0;
         alan5=0;
@@ -43,7 +63,7 @@ public class UcretHesapla {
         double fgecepuan=150;
         double tgunduzpuan=140*2;
         double tgecepuan=150*2;
-        if (fb.getSec_egitimturuint()==1) {//�zel ��retim
+        if (fb.getSec_egitimturuint()==1) {//Özel Öğretim
             gunduzpuan *= 1.25;
             gecepuan *= 1.25;
             fgunduzpuan *= 1.25;
@@ -64,7 +84,7 @@ public class UcretHesapla {
             alan2 = (fb.getEd2() * maasKatsayi * gecepuan);
             alan3 = (fb.getEd3() * maasKatsayi * gunduzpuan * 2);
             alan4 = (fb.getEd4() * maasKatsayi * gecepuan * 2);
-        } else { // Y.Lisans and Doktora
+        } else { //Y.Lisans and Doktora
             alan1 = (fb.getEd1() * maasKatsayi * fgunduzpuan);
             alan2 = (fb.getEd2() * maasKatsayi * fgecepuan);
             alan3 = (fb.getEd3() * maasKatsayi * gunduzpuan);
@@ -77,7 +97,7 @@ public class UcretHesapla {
     private void getSozlesmeliOgretmenHesap(FormBean fb){
         double gunduzpuan=140;
         double gecepuan=150;
-        if (fb.getSec_egitimturuint()==1) {//�zel ��retim
+        if (fb.getSec_egitimturuint()==1) {//Özel Öğretim
             gunduzpuan *= 1.25;
             gecepuan *= 1.25;
         }
@@ -86,14 +106,31 @@ public class UcretHesapla {
         alan3 = 0; alan4 = 0; alan5 = 0; alan6 = 0;
     }
 
+    private void getUcretliOgretmenHesap(FormBean fb){
+        double gunduzpuan=140;
+        double gecepuan=150;
+        alan1 = ((fb.getEd1() * maasKatsayi * gunduzpuan));
+        alan2 = (fb.getEd2() * maasKatsayi * gecepuan);
+        primGunu= (int) Math.ceil((fb.getEd1() + fb.getEd2()) / 7.5);
+        alan3 = 0; alan4 = 0; alan5 = 0; alan6 = 0;
+    }
+
     private void toplamTahakkuk(FormBean fb){
         this.ssk=0;
+        this.agi=0;
         this.toplam = yuvarla(alan1+alan2+alan3+alan4+alan5+alan6,2);
-        if (fb.getSec_unvanint()==6) // s�zle�meliden ssk kesilir.
-            this.ssk=this.toplam*sskOran;
+        if (fb.getSec_unvanint()==6) // sözleşmeliden ssk kesilir.
+            this.ssk=yuvarla(this.toplam*sskOran/100,2);
+        if (fb.getSec_unvanint()==7){ //Ücretli Öğretmenden ssk kesilir
+            if(fb.getSec_statuint()==1)
+                this.ssk=yuvarla(this.toplam*sskEmekliOran/100,2);
+            else
+                this.ssk=yuvarla(this.toplam*sskOran/100,2);
+        }
         this.vergi  = yuvarla(((toplam-ssk) * voran(fb.getSec_vergidilimiint())/100),2);
+        this.agi    = AgiHesap(fb.getSec_medeniint(),this.vergi);
         this.damga  = yuvarla(toplam * damgaOran,2);
-        this.net    = yuvarla(toplam - (vergi+damga+ssk),2);
+        this.net    = yuvarla(this.toplam+this.agi - (vergi+damga+ssk),2);
     }
 
     public int voran(int v){
@@ -120,6 +157,28 @@ public class UcretHesapla {
         return Math.round(sayi*pin)/pin;
     }
 
+    public double AgiHesap(int sec,double vh){
+        double agi= yuvarla((AgiOran(sec)*asgariUcret)*0.15,2);
+        if (agi>vh) return vh;
+        return agi;
+    }
+
+    public double AgiOran(int sec){
+        switch (sec){
+            case 0 :return 0.5;//	Bekar
+            case 1 :return 0.5;//	Evli eşi çalışan
+            case 2 :return 0.575;//	Evli eşi çalışan 1 çocuk
+            case 3 :return 0.65;//	Evli eşi çalışan 2 çocuk
+            case 4 :return 0.75;//	Evli eşi çalışan 3 çocuk
+            case 5 :return 0.8;//	Evli eşi çalışan 4 çocuk
+            case 6 :return 0.85;//	Evli eşi çalışan 5 ve üzeri çocuk
+            case 7 :return 0.6;//	Evli eşi çalışmayan
+            case 8 :return 0.675;//	Evli eşi çalışmayan 1 çocuk
+            case 9 :return 0.75;//	Evli eşi çalışmayan 2 çocuk
+            case 10:return 0.85;//	Evli eşi çalışmayan 3 ve üzeri çocuk
+        }
+        return 0.5;
+    }
 
     public double getAlan1() {
         return alan1;
@@ -211,5 +270,21 @@ public class UcretHesapla {
 
     public void setSsk(double ssk) {
         this.ssk = ssk;
+    }
+
+    public int getPrimGunu() {
+        return primGunu;
+    }
+
+    public void setPrimGunu(int primGunu) {
+        this.primGunu = primGunu;
+    }
+
+    public double getAgi() {
+        return agi;
+    }
+
+    public void setAgi(double agi) {
+        this.agi = agi;
     }
 }
