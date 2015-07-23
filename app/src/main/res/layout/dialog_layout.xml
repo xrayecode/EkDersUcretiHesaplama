@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#2f2f2f"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <!-- layout title -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical" >
@@ -17,7 +18,7 @@
         <TextView
             android:id="@+id/txt_dialog_title"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="30dp"
             android:gravity="center"
             android:text="@string/custom_dialog_head"
             android:textAppearance="?android:attr/textAppearance"
@@ -31,37 +32,231 @@
 
     <!-- layout dialog content -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_dialog_content"
         android:layout_width="match_parent"
+        android:orientation="horizontal"
         android:layout_height="wrap_content"
-        android:padding="8dp" >
+        android:padding="8dp"
+        android:layout_weight="5.31"
+        android:weightSum="1">
 
         <ImageView
-            android:id="@+id/img_dialog_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            android:src="@android:drawable/ic_dialog_info" />
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/calc"
+            android:layout_weight=".05"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical" />
 
-        <TextView
-            android:id="@+id/txt_dialog_message"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignTop="@+id/img_dialog_icon"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/img_dialog_icon"
-            android:autoLink="web"
-            android:ellipsize="end"
-            android:paddingTop="8dp"
-            android:textAppearance="?android:attr/textAppearance"
-            android:textColor="@android:color/white"
-            android:textStyle="normal" />
-    </RelativeLayout>
+            android:layout_weight="0.95"
+            android:weightSum="100">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:ems="9"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_prim_gunu">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/prim_gunu"
+                    android:id="@+id/textView16"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ffa2ff88" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/prim_gunu"
+                    android:textColor="#ffa2ff88" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_burut_tutar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Bürüt Tutar"
+                    android:id="@+id/textView8"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ff3defff" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/burut_tutar"
+                    android:textColor="#ff3defff"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_vergi_kesintisi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Vergi Kesintisi"
+                    android:id="@+id/textView6"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ffff5c96" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/vergi_kesintisi"
+                    android:textColor="#ffff5c96" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_damga_kesintisi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Damga Kesintisi"
+                    android:id="@+id/textView10"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ffff5c96" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/damga_kesintisi"
+                    android:textColor="#ffff5c96" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_ssk_kesintisi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="SSK Kesintisi"
+                    android:id="@+id/textView12"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ffff5c96" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/ssk_kesintisi"
+                    android:textColor="#ffff5c96" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:ems="9"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_agi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="AGİ"
+                    android:id="@+id/textView14"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ff3defff" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/agi"
+                    android:textColor="#ff3defff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:weightSum="100"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/lyt_odenecek_tutar">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ödenecek Tutar"
+                    android:id="@+id/textView18"
+                    android:gravity="right"
+                    android:ems="8"
+                    android:paddingRight="10dp"
+                    android:textColor="#ff3defff" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="0"
+                    android:id="@+id/odenecek_tutar"
+                    android:textColor="#ff3defff" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- layout dialog buttons -->
 

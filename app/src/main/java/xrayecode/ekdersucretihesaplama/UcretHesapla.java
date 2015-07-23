@@ -126,9 +126,9 @@ public class UcretHesapla {
                 this.ssk=yuvarla(this.toplam*sskEmekliOran/100,2);
             else
                 this.ssk=yuvarla(this.toplam*sskOran/100,2);
+            this.agi    = AgiHesap(fb.getSec_medeniint(), this.vergi);
         }
-        this.vergi  = yuvarla(((toplam-ssk) * voran(fb.getSec_vergidilimiint())/100),2);
-        this.agi    = AgiHesap(fb.getSec_medeniint(),this.vergi);
+        this.vergi = yuvarla(((toplam-ssk) * voran(fb.getSec_vergidilimiint())/100),2);
         this.damga  = yuvarla(toplam * damgaOran,2);
         this.net    = yuvarla(this.toplam+this.agi - (vergi+damga+ssk),2);
     }

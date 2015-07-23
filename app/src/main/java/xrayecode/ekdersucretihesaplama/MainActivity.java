@@ -18,9 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+
 
 public class MainActivity extends Activity {
-    Button btn;
+    BootstrapButton btn;
     LinearLayout l1;
     Spinner unvanspn,egitimturuspn,sonogrenimspn,vergidilimispn,statuspn,medenispn,islemturuspn;
     int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint,sec_medeniint,sec_statuint,sec_islemturuint;
@@ -40,7 +42,7 @@ public class MainActivity extends Activity {
         getSpinner();
 
 
-        btn=(Button) findViewById(R.id.btn_hesapla);
+        btn=(BootstrapButton) findViewById(R.id.btn_hesapla);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +89,45 @@ public class MainActivity extends Activity {
         dialog.setContentView(view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         TextView txtTitle = (TextView) dialog.findViewById(R.id.txt_dialog_title);
-        txtTitle.setText("Sonuç");
+        txtTitle.setText(sec_unvantxt+" - Ek Ders Ücreti");
 
-        TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_dialog_message);
-        txtMessage.setText("Toplam:" + uh.getToplam() + "\nVergi:" + uh.getVergi() + "\nDamga:" + uh.getDamga()+" \nSsk:"+uh.getSsk()+"\nAgi:"+uh.getAgi()+ "\nNet:" + uh.getNet());
+        TextView prim_gunu = (TextView) dialog.findViewById(R.id.prim_gunu);
+        TextView burut_tutar = (TextView) dialog.findViewById(R.id.burut_tutar);
+        TextView vergi_kesintisi = (TextView) dialog.findViewById(R.id.vergi_kesintisi);
+        TextView damga_kesintisi = (TextView) dialog.findViewById(R.id.damga_kesintisi);
+        TextView ssk_kesintisi = (TextView) dialog.findViewById(R.id.ssk_kesintisi);
+        TextView agi = (TextView) dialog.findViewById(R.id.agi);
+        TextView odenecek_tutar = (TextView) dialog.findViewById(R.id.odenecek_tutar);
+
+        LinearLayout lyt_prim_gunu     = (LinearLayout) dialog.findViewById(R.id.lyt_prim_gunu);
+        LinearLayout lyt_burut_tutar = (LinearLayout) dialog.findViewById(R.id.lyt_burut_tutar);
+        LinearLayout lyt_vergi_kesintisi = (LinearLayout) dialog.findViewById(R.id.lyt_vergi_kesintisi);
+        LinearLayout lyt_damga_kesintisi = (LinearLayout) dialog.findViewById(R.id.lyt_damga_kesintisi);
+        LinearLayout lyt_ssk_kesintisi = (LinearLayout) dialog.findViewById(R.id.lyt_ssk_kesintisi);
+        LinearLayout lyt_agi = (LinearLayout) dialog.findViewById(R.id.lyt_agi);
+        LinearLayout layout_dialog_content = (LinearLayout) dialog.findViewById(R.id.layout_dialog_content);
+
+
+        prim_gunu.setText(""+uh.getPrimGunu());
+        burut_tutar.setText(""+uh.getToplam());
+        vergi_kesintisi.setText(""+uh.getVergi());
+        damga_kesintisi.setText(""+uh.getDamga());
+        ssk_kesintisi.setText(""+uh.getSsk());
+        agi.setText(""+uh.getAgi());
+        odenecek_tutar.setText(""+uh.getNet());
+
+        if (uh.getPrimGunu()<=0) lyt_prim_gunu.setVisibility(View.GONE);
+        if (uh.getToplam()<=0) lyt_burut_tutar.setVisibility(View.GONE);
+        if (uh.getVergi()<=0) lyt_vergi_kesintisi.setVisibility(View.GONE);
+        if (uh.getDamga()<=0) lyt_damga_kesintisi.setVisibility(View.GONE);
+        if (uh.getSsk()<=0) lyt_ssk_kesintisi.setVisibility(View.GONE);
+        if (uh.getAgi()<=0) lyt_agi.setVisibility(View.GONE);
+
+        layout_dialog_content.invalidate();
+
+
+        // TextView txtMessage = (TextView) dialog.findViewById(R.id.txt_dialog_message);
+       // txtMessage.setText("Toplam:" + uh.getToplam() + "\nVergi:" + uh.getVergi() + "\nDamga:" + uh.getDamga()+" \nSsk:"+uh.getSsk()+"\nAgi:"+uh.getAgi()+ "\nNet:" + uh.getNet());
         /*
         Button btnOpenBrowser = (Button) dialog.findViewById(R.id.btn_open_browser);
         btnOpenBrowser.setOnClickListener(new View.OnClickListener() {
