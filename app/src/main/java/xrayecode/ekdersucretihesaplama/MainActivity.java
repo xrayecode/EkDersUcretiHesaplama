@@ -22,7 +22,8 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 
 
 public class MainActivity extends Activity {
-    BootstrapButton btn;
+    BootstrapButton btnHesapla;
+    BootstrapButton btnTemizle;
     LinearLayout l1;
     Spinner unvanspn,egitimturuspn,sonogrenimspn,vergidilimispn,statuspn,medenispn,islemturuspn;
     int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint,sec_medeniint,sec_statuint,sec_islemturuint;
@@ -42,16 +43,39 @@ public class MainActivity extends Activity {
         getSpinner();
 
 
-        btn=(BootstrapButton) findViewById(R.id.btn_hesapla);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnHesapla=(BootstrapButton) findViewById(R.id.btn_hesapla);
+        btnHesapla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Hesapla();
                 showSonucDialog();
             }
         });
+        btnTemizle= (BootstrapButton) findViewById(R.id.btn_temizle);
+        btnTemizle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Temizle();
+            }
+        });
     }
+    private void Temizle(){
+        islemturuspn.setSelection(0);
+        unvanspn.setSelection(0);
+        egitimturuspn.setSelection(0); layout_egitimturu.setVisibility(View.GONE);
+        sonogrenimspn.setSelection(0); layout_mezuniyet.setVisibility(View.GONE);
+        vergidilimispn.setSelection(0);layout_vergidilimi.setVisibility(View.GONE);
+        medenispn.setSelection(0);     layout_medeni.setVisibility(View.GONE);
+        statuspn.setSelection(0);      layout_statu.setVisibility(View.GONE);
+        edit_1.setText(""); layout_1.setVisibility(View.GONE);
+        edit_2.setText(""); layout_2.setVisibility(View.GONE);
+        edit_3.setText(""); layout_3.setVisibility(View.GONE);
+        edit_4.setText(""); layout_4.setVisibility(View.GONE);
+        edit_5.setText(""); layout_5.setVisibility(View.GONE);
+        edit_6.setText(""); layout_6.setVisibility(View.GONE);
+        layout_main.invalidate();
 
+    }
     private void Hesapla(){
         fb = new FormBean();
         fb.setEd1(Integer.parseInt(nvl(edit_1.getText().toString(),"0")));
@@ -67,8 +91,6 @@ public class MainActivity extends Activity {
         fb.setSec_statuint(this.sec_statuint);
         fb.setSec_medeniint(this.sec_medeniint);
         fb.setSec_islemturuint(this.sec_islemturuint);
-
-
         uh = new UcretHesapla(fb);
     }
 
@@ -89,7 +111,13 @@ public class MainActivity extends Activity {
         dialog.setContentView(view);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         TextView txtTitle = (TextView) dialog.findViewById(R.id.txt_dialog_title);
-        txtTitle.setText(sec_unvantxt+" - Ek Ders Ücreti");
+        txtTitle.setText("Ek Ders Ücreti");
+        if(sec_islemturuint==1)
+            txtTitle.setText("AGİ Tutarı");
+        else
+            if (sec_unvanint!=0)
+                txtTitle.setText(sec_unvantxt+" - Ek Ders Ücreti");
+
 
         TextView prim_gunu = (TextView) dialog.findViewById(R.id.prim_gunu);
         TextView burut_tutar = (TextView) dialog.findViewById(R.id.burut_tutar);
@@ -122,7 +150,6 @@ public class MainActivity extends Activity {
         if (uh.getDamga()<=0) lyt_damga_kesintisi.setVisibility(View.GONE);
         if (uh.getSsk()<=0) lyt_ssk_kesintisi.setVisibility(View.GONE);
         if (uh.getAgi()<=0) lyt_agi.setVisibility(View.GONE);
-
         layout_dialog_content.invalidate();
 
 
@@ -319,58 +346,53 @@ public class MainActivity extends Activity {
     }
 
     private void setVisibilityChange() {
-        layout_unvan.setVisibility(View.VISIBLE);
-        layout_egitimturu.setVisibility(View.VISIBLE);
-        layout_mezuniyet.setVisibility(View.VISIBLE);
-        layout_vergidilimi.setVisibility(View.VISIBLE);
-        layout_medeni.setVisibility(View.VISIBLE);
-        layout_statu.setVisibility(View.VISIBLE);
-        layout_1.setVisibility(View.VISIBLE);
-        layout_2.setVisibility(View.VISIBLE);
-        layout_3.setVisibility(View.VISIBLE);
-        layout_4.setVisibility(View.VISIBLE);
-        layout_5.setVisibility(View.VISIBLE);
-        layout_6.setVisibility(View.VISIBLE);
+        layout_unvan.setVisibility(View.GONE);
+        layout_egitimturu.setVisibility(View.GONE);
+        layout_mezuniyet.setVisibility(View.GONE);
+        layout_vergidilimi.setVisibility(View.GONE);
+        layout_medeni.setVisibility(View.GONE);
+        layout_statu.setVisibility(View.GONE);
         edit_1.setText("");edit_2.setText("");
-        edit_3.setText("");edit_4.setText("");
-        edit_5.setText("");edit_6.setText("");
-        if(sec_unvanint==0 && sec_islemturuint==0){
-            layout_1.setVisibility(View.GONE);
-            layout_2.setVisibility(View.GONE);
-            layout_3.setVisibility(View.GONE);
-            layout_4.setVisibility(View.GONE);
-            layout_5.setVisibility(View.GONE);
-            layout_6.setVisibility(View.GONE);
-            layout_egitimturu.setVisibility(View.GONE);
-            layout_mezuniyet.setVisibility(View.GONE);
-            layout_vergidilimi.setVisibility(View.GONE);
-            layout_medeni.setVisibility(View.GONE);
-            layout_statu.setVisibility(View.GONE);
+        edit_3.setText("");
+        edit_4.setText("");
+        edit_5.setText("");
+        edit_6.setText("");
+        layout_1.setVisibility(View.GONE);
+        layout_2.setVisibility(View.GONE);
+        layout_3.setVisibility(View.GONE);
+        layout_4.setVisibility(View.GONE);
+        layout_5.setVisibility(View.GONE);
+        layout_6.setVisibility(View.GONE);
+        if(sec_islemturuint==0){
+            layout_unvan.setVisibility(View.VISIBLE);
         }
-        if ((sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4)  && sec_islemturuint==0 ){//profesÃƒÂ¶r,//doÃƒÂ§ent,//yar. doÃƒÂ§ent
-            layout_egitimturu.setVisibility(View.GONE);
-            layout_mezuniyet.setVisibility(View.GONE);
-            layout_medeni.setVisibility(View.GONE);
-            layout_statu.setVisibility(View.GONE);
-            layout_4.setVisibility(View.GONE);
-            layout_5.setVisibility(View.GONE);
-            layout_6.setVisibility(View.GONE);
+        else layout_medeni.setVisibility(View.VISIBLE);
+        if ((sec_unvanint==1 || sec_unvanint==2 ||sec_unvanint==3  ||sec_unvanint==4) && sec_islemturuint==0){//Profesör,//Doçent,//Yar.Doçent
+            layout_vergidilimi.setVisibility(View.VISIBLE);
+            layout_1.setVisibility(View.VISIBLE);
+            layout_2.setVisibility(View.VISIBLE);
+            layout_3.setVisibility(View.VISIBLE);
             label_1.setText(R.string.gunduz_normal_ogretim);
             label_2.setText(R.string.gece_normal_ogretim);
             label_3.setText(R.string.gece_ikinci_ogretim);
         }
 
         if (sec_unvanint==5  && sec_islemturuint==0){
-            layout_medeni.setVisibility(View.GONE);
-            layout_statu.setVisibility(View.GONE);
+            layout_egitimturu.setVisibility(View.VISIBLE);
+            layout_mezuniyet.setVisibility(View.VISIBLE);
+            layout_vergidilimi.setVisibility(View.VISIBLE);
+            layout_1.setVisibility(View.VISIBLE);
+            layout_2.setVisibility(View.VISIBLE);
+            layout_3.setVisibility(View.VISIBLE);
+            layout_4.setVisibility(View.VISIBLE);
             if(sec_sonogrenimint==0) {
-                layout_5.setVisibility(View.GONE);
-                layout_6.setVisibility(View.GONE);
                 label_1.setText(R.string.gunduz_normal_ogretim);
                 label_2.setText(R.string.gece_normal_ogretim);
                 label_3.setText(R.string.gunduz_takviye_kursu);
                 label_4.setText(R.string.gece_takviye_kursu);
             }else {
+                layout_5.setVisibility(View.VISIBLE);
+                layout_6.setVisibility(View.VISIBLE);
                 label_1.setText(R.string.gunduz_fiilen_girilen);
                 label_2.setText(R.string.gece_fiilen_girilen);
                 label_3.setText(R.string.gunduz_normal_ogretim);
@@ -380,42 +402,24 @@ public class MainActivity extends Activity {
             }
         }
         if (sec_unvanint==6 && sec_islemturuint==0){
-            layout_mezuniyet.setVisibility(View.GONE);
-            layout_medeni.setVisibility(View.GONE);
-            layout_statu.setVisibility(View.GONE);
-            layout_3.setVisibility(View.GONE);
-            layout_4.setVisibility(View.GONE);
-            layout_5.setVisibility(View.GONE);
-            layout_6.setVisibility(View.GONE);
+            layout_egitimturu.setVisibility(View.VISIBLE);
+            layout_vergidilimi.setVisibility(View.VISIBLE);
             label_1.setText(R.string.gunduz_normal_ogretim);
             label_2.setText(R.string.gece_normal_ogretim);
+            layout_1.setVisibility(View.VISIBLE);
+            layout_2.setVisibility(View.VISIBLE);
         }
         if (sec_unvanint==7 && sec_islemturuint==0){
-            layout_mezuniyet.setVisibility(View.GONE);
-            layout_egitimturu.setVisibility(View.GONE);
-            layout_3.setVisibility(View.GONE);
-            layout_4.setVisibility(View.GONE);
-            layout_5.setVisibility(View.GONE);
-            layout_6.setVisibility(View.GONE);
+            layout_statu.setVisibility(View.VISIBLE);
+            layout_medeni.setVisibility(View.VISIBLE);
+            layout_vergidilimi.setVisibility(View.VISIBLE);
+            layout_1.setVisibility(View.VISIBLE);
+            layout_2.setVisibility(View.VISIBLE);
             label_1.setText(R.string.gunduz_normal_ogretim);
             label_2.setText(R.string.gece_normal_ogretim);
-        }
-        if (sec_islemturuint==1){
-            layout_unvan.setVisibility(View.GONE);
-            layout_egitimturu.setVisibility(View.GONE);
-            layout_mezuniyet.setVisibility(View.GONE);
-            layout_vergidilimi.setVisibility(View.GONE);
-            layout_statu.setVisibility(View.GONE);
-            layout_1.setVisibility(View.GONE);
-            layout_2.setVisibility(View.GONE);
-            layout_3.setVisibility(View.GONE);
-            layout_4.setVisibility(View.GONE);
-            layout_5.setVisibility(View.GONE);
-            layout_6.setVisibility(View.GONE);
         }
 
         layout_main.invalidate();
-
     }
 
     @Override

@@ -15,30 +15,34 @@ public class UcretHesapla {
 
     public UcretHesapla(FormBean fb) {
 
-        switch (fb.getSec_unvanint()){
-            case 1:
-            case 2:
-            case 3:
-            case 4:{
-                getIlkDortUnvanHesap(fb);
-                break;
-            }
-            case 5:{
-                getKadroluOgretmenHesap(fb);
-                break;
-            }
-            case 6:{
-                getSozlesmeliOgretmenHesap(fb);
-                break;
-            }
-            case 7:{
-                getUcretliOgretmenHesap(fb);
-                break;
-            }
+        if (fb.getSec_islemturuint()==1)
+            agiTahakkuk(fb);
+        else {
+            switch (fb.getSec_unvanint()) {
+                case 1:
+                case 2:
+                case 3:
+                case 4: {
+                    getIlkDortUnvanHesap(fb);
+                    break;
+                }
+                case 5: {
+                    getKadroluOgretmenHesap(fb);
+                    break;
+                }
+                case 6: {
+                    getSozlesmeliOgretmenHesap(fb);
+                    break;
+                }
+                case 7: {
+                    getUcretliOgretmenHesap(fb);
+                    break;
+                }
 
 
+            }
+            toplamTahakkuk(fb);
         }
-        toplamTahakkuk(fb);
     }
 
     private void getIlkDortUnvanHesap(FormBean fb){
@@ -131,6 +135,13 @@ public class UcretHesapla {
         this.vergi = yuvarla(((toplam-ssk) * voran(fb.getSec_vergidilimiint())/100),2);
         this.damga  = yuvarla(toplam * damgaOran,2);
         this.net    = yuvarla(this.toplam+this.agi - (vergi+damga+ssk),2);
+    }
+
+    private void agiTahakkuk(FormBean fb){
+        this.ssk=0;
+        this.agi=0;
+        this.net=0;
+        this.net    = AgiHesap(fb.getSec_medeniint(), 9999999.99);
     }
 
     public int voran(int v){
