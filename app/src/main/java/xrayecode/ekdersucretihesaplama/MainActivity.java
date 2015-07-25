@@ -59,6 +59,7 @@ public class MainActivity extends Activity {
             }
         });
     }
+
     private void Temizle(){
         islemturuspn.setSelection(0);
         unvanspn.setSelection(0);
