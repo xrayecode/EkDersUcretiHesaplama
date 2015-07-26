@@ -5,6 +5,7 @@
     <string name="btn_cancel">KAPAT</string>
     <string name="btn_hesapla">  Hesapla  </string>
     <string name="btn_temizle">  Temizle  </string>
+    <string name="btn_cikis">  Çıkış  </string>
     <string name="gunduz_normal_ogretim">Gündüz Normal\nÖğretim</string>
     <string name="gece_normal_ogretim">Gece Normal\nÖğretim</string>
     <string name="gece_ikinci_ogretim">Gece İkinci\nÖğretim</string>

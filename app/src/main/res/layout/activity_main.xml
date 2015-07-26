@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -565,6 +566,20 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-8043402287063085/8603278050" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal">
 
@@ -572,7 +587,7 @@
                 android:id="@+id/btn_hesapla"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:text="@string/btn_hesapla"
                 bootstrapbutton:bb_type="info"
                 bootstrapbutton:bb_size="small"
@@ -580,16 +595,26 @@
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btn_temizle"
-                android:layout_width="100dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:text="@string/btn_temizle"
                 bootstrapbutton:bb_type="success"
                 bootstrapbutton:bb_size="small"
                 bootstrapbutton:bb_icon_right="fa-edit"/>
 
-        </LinearLayout>
-    </LinearLayout>
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/btn_cikis"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/btn_cikis"
+                bootstrapbutton:bb_type="danger"
+                bootstrapbutton:bb_size="small"
+                bootstrapbutton:bb_icon_right="fa-power-off"/>
 
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

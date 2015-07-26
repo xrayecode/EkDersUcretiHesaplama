@@ -17,13 +17,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.google.android.gms.ads.*;
 
 
 public class MainActivity extends Activity {
+    private InterstitialAd interstitialAd;
+    AdView adView;
     BootstrapButton btnHesapla;
     BootstrapButton btnTemizle;
+    BootstrapButton btnCikis;
+    Boolean exitApp=false;
     LinearLayout l1;
     Spinner unvanspn,egitimturuspn,sonogrenimspn,vergidilimispn,statuspn,medenispn,islemturuspn;
     int sec_unvanint,sec_egitimturuint,sec_sonogrenimint,sec_vergidilimiint,sec_medeniint,sec_statuint,sec_islemturuint;
@@ -40,15 +46,24 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setItem();
-        getSpinner();
 
+        adView = (AdView) this.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
+
+
+        getSpinner();
+        launchInter();
 
         btnHesapla=(BootstrapButton) findViewById(R.id.btn_hesapla);
         btnHesapla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Hesapla();
+                loadInterstitial();
                 showSonucDialog();
+
             }
         });
         btnTemizle= (BootstrapButton) findViewById(R.id.btn_temizle);
@@ -58,6 +73,55 @@ public class MainActivity extends Activity {
                 Temizle();
             }
         });
+
+        btnCikis= (BootstrapButton) findViewById(R.id.btn_cikis);
+        btnCikis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              finish();
+            }
+        });
+
+    }
+
+    private void launchInter(){
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-8043402287063085/4312679259");
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+               if (exitApp){
+                   finish();
+               }
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+            }
+
+            @Override
+            public void onAdLoaded() {
+                showAdInter();
+            }
+        });
+
+    }
+
+    private void showAdInter() {
+        // If Ads are loaded, show Interstitial else show nothing.
+        if (interstitialAd.isLoaded()) {
+            interstitialAd.show();
+        } else Toast.makeText(getApplicationContext(), "Henüz hazır değil", Toast.LENGTH_LONG).show();
+
+    }
+
+    public void loadInterstitial(){
+        AdRequest adRequest = new AdRequest.Builder()
+                                           .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                                           .addTestDevice("INSERT_YOUR_HASHED_DEVICE_ID_HERE")
+                                           .build();
+        interstitialAd.loadAd(adRequest);
     }
 
     private void Temizle(){
