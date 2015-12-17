@@ -257,8 +257,7 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <!-- layout dialog buttons -->
+   
 
     <LinearLayout
         android:id="@+id/layout_dialog_buttons"
